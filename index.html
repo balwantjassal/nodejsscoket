@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Hello world</title>
+   </head>
+   <script src = "/socket.io/socket.io.js">     
+   </script>
+   <script>
+       var socket = io();
+       socket.on('ServerEvent',function(data){
+        document.getElementById('main').innerHTML = data.desc;
+       });
+       socket.emit('clientEvent', 'Sent an event from the client!');
+       socket.on('broadcast',function(data){
+           document.getElementById('brdmsg').innerHTML = data.description;
+       });
+
+       var socket1 = io('/KEM13');
+       socket1.on('Test',function(data){
+           document.getElementById('nsp').innerHTML = data;
+       });
+   </script>
+   <body>
+       <h1>Socket Programming Demo</h1>
+        <span id="brdmsg"></span>
+        <span id="main"></span>
+        <span id="nsp"></span>
+    </body>
+</html>
